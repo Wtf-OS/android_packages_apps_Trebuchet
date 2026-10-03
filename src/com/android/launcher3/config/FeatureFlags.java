@@ -19,7 +19,6 @@ package com.android.launcher3.config;
 import static com.android.launcher3.config.FeatureFlags.BooleanFlag.DISABLED;
 import static com.android.launcher3.config.FeatureFlags.BooleanFlag.ENABLED;
 import static com.android.wm.shell.Flags.enableTaskbarNavbarUnification;
-import static com.android.wm.shell.Flags.enableTaskbarOnPhones;
 
 import android.content.res.Resources;
 
@@ -103,8 +102,9 @@ public final class FeatureFlags {
     public static final BooleanFlag NOTIFY_CRASHES = getDebugFlag(270393108, "NOTIFY_CRASHES",
             DISABLED, "Sends a notification whenever launcher encounters an uncaught exception.");
 
+    // Legacy phone SystemUI owns navigation; match its flags before enabling unification.
     public static final boolean ENABLE_TASKBAR_NAVBAR_UNIFICATION =
-            enableTaskbarNavbarUnification() && (!isPhone() || enableTaskbarOnPhones());
+            enableTaskbarNavbarUnification() && !isPhone();
 
     private static boolean isPhone() {
         final boolean isPhone;
