@@ -320,8 +320,8 @@ public class DesktopVisibilityController {
         }
         setRecentsGestureInProgress(false);
 
-        if (endTarget == null) {
-            // Gesture did not result in a new end target. Ensure launchers gets paused again.
+        if (endTarget == null && areDesktopTasksVisible()) {
+            // Only visible desktop tasks keep launcher paused after a cancelled gesture.
             markLauncherPaused();
         }
     }
